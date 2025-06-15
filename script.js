@@ -20,7 +20,7 @@ async function initializeApp() {
     }
 }
 
-// Use books.json file loaded from /github/books.json
+// Use books.json file loaded from /books.json
 async function fetchBooks() {
     try {
         const response = await fetch('books.json');
@@ -297,9 +297,9 @@ async function generatePDFAndOpenWhatsApp(orderData) {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
 
-    // Add title
+    // Add title - set to "Sri Nampally Baba Book Store - Order"
     doc.setFontSize(20);
-    doc.text('Temple Book Store - Order', 20, 20);
+    doc.text('Sri Nampally Baba Book Store - Order', 20, 20);
 
     // Add customer details
     doc.setFontSize(12);
