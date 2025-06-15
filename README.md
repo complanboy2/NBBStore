@@ -1,5 +1,5 @@
 
-# Temple Book Store - Public Catalog
+# NB Book Store - Public Catalog
 
 This is a standalone public catalog for the Temple Book Store that can be deployed to GitHub Pages. It allows public users to browse books, add them to cart, and place orders via WhatsApp.
 
