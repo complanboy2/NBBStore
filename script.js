@@ -125,7 +125,7 @@ function displayBooks() {
                 <p class="text-sm text-gray-600 mb-2">by ${book.author}</p>
                 ${book.category ? `<p class="text-xs text-gray-500 mb-2">${book.category}</p>` : ''}
                 <div class="flex justify-between items-center mb-3">
-                    <span class="text-lg font-bold text-orange-600">₹${book.saleprice}</span>
+                    <span class="text-lg font-bold text-orange-600">${book.saleprice}</span>
                 </div>
                 <button onclick="addToCart('${book.id}')" 
                         ${book.quantity <= 0 ? 'disabled' : ''}
@@ -235,7 +235,7 @@ function updateCartModal() {
             <div class="flex-1 min-w-0 pl-3">
                 <h4 class="font-medium line-clamp-1 mb-0.5">${item.name}</h4>
                 <p class="text-sm text-gray-600 mb-0.5">by ${item.author}</p>
-                <p class="text-sm text-orange-600 mb-0.5">₹${item.price} each</p>
+                <p class="text-sm text-orange-600 mb-0.5">${item.price} each</p>
             </div>
             <div class="flex items-center gap-2">
                 <button onclick="updateCartQuantity('${item.id}', ${item.quantity - 1})" 
@@ -427,8 +427,8 @@ async function generatePDFAndOpenWhatsApp(orderData) {
         doc.setFontSize(12.5);
         doc.setTextColor(0,0,0);
         doc.text(`${item.quantity}`, colX.qty, y + 11.2, { align: 'center' });
-        doc.text(`₹${item.price}`, colX.rate, y + 11.2, { align: 'center' });
-        doc.text(`₹${(item.quantity * item.price).toFixed(2)}`, colX.amt, y + 11.2, { align: 'center' });
+        doc.text(`${item.price}`, colX.rate, y + 11.2, { align: 'center' });
+        doc.text(`${(item.quantity * item.price).toFixed(2)}`, colX.amt, y + 11.2, { align: 'center' });
 
         y += imgHeight + 3; // vertical gap for next book
     }
@@ -438,7 +438,7 @@ async function generatePDFAndOpenWhatsApp(orderData) {
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(13.5);
     doc.setTextColor(231, 99, 12);
-    doc.text(`Total: ₹${orderData.total.toFixed(2)}`, pagePadding, y + 10);
+    doc.text(`Total: ${orderData.total.toFixed(2)}`, pagePadding, y + 10);
 
     // --- Custom Footer: less color gradient, address in italic, clean alignment ---
     const footerY = 282;
@@ -464,9 +464,9 @@ async function generatePDFAndOpenWhatsApp(orderData) {
                    `Address: ${orderData.customerAddress}\n\n` +
                    `Items:\n` +
                    orderData.items.map((item, index) =>
-                       `${index + 1}. ${item.name} by ${item.author}\n   Qty: ${item.quantity} x ₹${item.price}`
+                       `${index + 1}. ${item.name} by ${item.author}\n   Qty: ${item.quantity} x ${item.price}`
                    ).join('\n') +
-                   `\n\nTotal: ₹${orderData.total.toFixed(2)}\n\n` +
+                   `\n\nTotal: ${orderData.total.toFixed(2)}\n\n` +
                    `Please find the detailed order PDF attached.`;
     // Hardcoded to the requested WhatsApp number
     const whatsappURL = `https://wa.me/918885378147?text=${encodeURIComponent(message)}`;
