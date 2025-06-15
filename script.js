@@ -23,7 +23,7 @@ async function initializeApp() {
 // Use books.json file loaded from /github/books.json
 async function fetchBooks() {
     try {
-        const response = await fetch('github/books.json');
+        const response = await fetch('books.json');
         if (!response.ok) throw new Error('Failed to load static books data');
         books = await response.json();
         filteredBooks = [...books];
