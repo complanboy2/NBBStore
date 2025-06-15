@@ -1,12 +1,7 @@
-
 // Global variables
 let books = [];
 let cart = [];
 let filteredBooks = [];
-
-// API Configuration
-const SUPABASE_URL = 'https://pijhrmuamnwdgucfnycl.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBpamhybXVhbW53ZGd1Y2ZueWNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDUyNDk1NTAsImV4cCI6MjA2MDgyNTU1MH0.qf5P5eWDSLRmFKxIwtqBygxNAvIFtqGxJN3J4nX7ocE';
 
 // Initialize the app
 document.addEventListener('DOMContentLoaded', function() {
@@ -25,28 +20,18 @@ async function initializeApp() {
     }
 }
 
+// Use books.json file loaded from /github/books.json
 async function fetchBooks() {
     try {
-        const response = await fetch(`${SUPABASE_URL}/rest/v1/books?select=*`, {
-            headers: {
-                'apikey': SUPABASE_ANON_KEY,
-                'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
-            }
-        });
-
-        if (!response.ok) {
-            throw new Error('Failed to fetch books');
-        }
-
+        const response = await fetch('github/books.json');
+        if (!response.ok) throw new Error('Failed to load static books data');
         books = await response.json();
         filteredBooks = [...books];
-        
         document.getElementById('books-loading').classList.add('hidden');
-        
     } catch (error) {
-        console.error('Error fetching books:', error);
+        console.error('Error fetching books (static):', error);
         document.getElementById('books-loading').classList.add('hidden');
-        showError('Failed to load books from server');
+        showError('Failed to load books from static file');
     }
 }
 
@@ -172,7 +157,8 @@ function addToCart(bookId) {
             author: book.author,
             price: book.saleprice,
             quantity: 1,
-            maxQuantity: book.quantity
+            maxQuantity: book.quantity,
+            imageurl: book.imageurl // Ensure this property is included
         });
     }
 
