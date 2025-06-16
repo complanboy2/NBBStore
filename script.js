@@ -117,7 +117,7 @@ function displayBooks() {
             <div class="aspect-w-3 aspect-h-4 bg-gray-200">
                 <img src="${book.imageurl || 'https://via.placeholder.com/300x400?text=No+Image'}" 
                      alt="${book.name}" 
-                     class="w-full h-48 object-cover"
+                     class="w-full h-48 object-contain"
                      onerror="this.src='https://via.placeholder.com/300x400?text=No+Image'">
             </div>
             <div class="p-4">
